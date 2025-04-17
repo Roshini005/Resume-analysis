@@ -1,6 +1,7 @@
 import streamlit as st
 import re
 
+# Define keyword lists
 PROS_KEYWORDS = [
     "hardworking", "team", "problem-solving", "leadership", "time management",
     "communication", "adaptability", "quick learner", "organized", "responsible",
@@ -12,7 +13,7 @@ CONS_KEYWORDS = [
     "no experience", "lack", "beginner", "unfamiliar", "limited", "difficult", "struggle"
 ]
 
-
+# Function to extract pros and cons
 def extract_pros_and_cons(text):
     text_lower = text.lower()
     sentences = re.split(r'[\n.]\s*', text_lower)
@@ -32,34 +33,41 @@ def extract_pros_and_cons(text):
 
     return pros, cons
 
-# --- Streamlit App ---
-st.set_page_config(page_title="Resume Pros & Cons Extractor", layout="centered")
 
+# --- Streamlit UI ---
+st.set_page_config(page_title="Resume Pros & Cons Extractor", layout="wide")
 st.title("📄 Resume Pros & Cons Analyzer")
 
 uploaded_file = st.file_uploader("Upload your resume (as a .txt file)", type=["txt"])
 
 if uploaded_file is not None:
     file_content = uploaded_file.read().decode("utf-8")
-
-    st.subheader("🔍 Extracting insights...")
     pros, cons = extract_pros_and_cons(file_content)
 
-    st.markdown("### ✅ Pros Identified:")
-    if pros:
-        for p in pros:
-            st.write(f"• {p}")
-    else:
-        st.write("No pros found.")
+    st.markdown("---")
+    st.subheader("🔍 Resume Analysis")
 
-    st.markdown("### ⚠️ Cons Identified:")
-    if cons:
-        for c in cons:
-            st.write(f"• {c}")
-    else:
-        st.write("No cons detected — your resume looks great!")
+    # Create two columns
+    left_col, right_col = st.columns(2)
 
-    st.success("Analysis complete.")
+    with left_col:
+        st.markdown("### 📄 Uploaded Resume")
+        st.text_area("Your Resume Content:", file_content, height=500)
+
+    with right_col:
+        st.markdown("### ✅ Pros Identified")
+        if pros:
+            for p in pros:
+                st.markdown(f"✔️ {p}")
+        else:
+            st.info("No strong pros found.")
+
+        st.markdown("### ⚠️ Cons Identified")
+        if cons:
+            for c in cons:
+                st.markdown(f"❌ {c}")
+        else:
+            st.success("No cons detected — your resume looks solid!")
 
 else:
-    st.info("Please upload a resume in .txt format to begin.")
+    st.info("📥 Please upload a `.txt` file to analyze your resume.")
