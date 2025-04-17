@@ -10,7 +10,10 @@ PROS_KEYWORDS = [
 ]
 
 CONS_KEYWORDS = [
-    "no experience", "lack", "beginner", "unfamiliar", "limited", "difficult", "struggle"
+    "no experience", "lack", "beginner", "unfamiliar", "limited",
+    "difficult", "struggle", "still learning", "basic knowledge",
+    "not confident", "trying to improve", "novice", "in progress",
+    "learning phase", "not experienced", "inexperienced", "needs improvement"
 ]
 
 # Function to extract pros and cons
