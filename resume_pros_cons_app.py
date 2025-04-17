@@ -10,10 +10,11 @@ PROS_KEYWORDS = [
 ]
 
 CONS_KEYWORDS = [
-    "no experience", "lack", "beginner", "unfamiliar", "limited",
-    "difficult", "struggle", "still learning", "basic knowledge",
-    "not confident", "trying to improve", "novice", "in progress",
-    "learning phase", "not experienced", "inexperienced", "needs improvement"
+    "no experience", "lack of experience", "beginner", "unfamiliar", "limited knowledge",
+    "difficult", "struggling", "trying to improve", "novice", "inexperienced", "in progress",
+    "learning phase", "not confident", "needs improvement", "basic knowledge", "still learning",
+    "lack of confidence", "requires guidance", "room for improvement", "under development", 
+    "not well-versed", "has potential but"
 ]
 
 # Function to extract pros and cons
@@ -25,10 +26,13 @@ def extract_pros_and_cons(text):
     cons = []
 
     for sentence in sentences:
+        # Check for pros
         for keyword in PROS_KEYWORDS:
             if keyword in sentence:
                 pros.append(sentence.strip())
                 break
+        
+        # Check for cons
         for keyword in CONS_KEYWORDS:
             if keyword in sentence:
                 cons.append(sentence.strip())
